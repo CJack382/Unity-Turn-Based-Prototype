@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b12b3eb4e5f85d04a90b4a5c0fd2e70a, type: 3}
   m_Name: Bob
   m_EditorClassIdentifier: 
-  cardName: 
-  health: 0
-  damageMin: 0
-  damageMax: 0
-  damageType: 0
-  cardType: 0
+  cardName: Bob
+  health: 10
+  damageMin: 4
+  damageMax: 7
+  damageType: 0200000003000000
+  cardType: 02000000
