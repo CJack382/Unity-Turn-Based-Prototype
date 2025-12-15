@@ -15,8 +15,10 @@ namespace SinuousProductions
         public int damageMin;
         public int damageMax;
 
-        public List<DamageType> damageType;
         public List<CardType> cardType;
+        public List<DamageType> damageType;
+
+        public Sprite cardSprite;
         //Basic Placeholder typings
         public enum CardType
         {

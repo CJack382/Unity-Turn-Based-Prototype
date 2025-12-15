@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Jane
   m_EditorClassIdentifier: 
   cardName: Jane
-  health: 7
-  damageMin: 6
-  damageMax: 8
-  damageType: 0400000003000000
-  cardType: 04000000
+  health: 6
+  damageMin: 7
+  damageMax: 9
+  cardType: 0400000002000000
+  damageType: 04000000
+  cardSprite: {fileID: 0}
