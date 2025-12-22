@@ -15,18 +15,18 @@ public class CardDisplay : MonoBehaviour
 
     private Color[] cardColors =
     {
-        Color.red, //Fire
-        new Color(0.0f, 0.52f, 0.24f),
-        Color.blue, //Water
+        new Color(0.8238993f, 0.2903206f, 0f), //Fire
+        new Color(0.0f, 0.52f, 0.24f), //Earth
+        new Color(0f, 0f, 0.5408804f), //Water
         new Color(0.23f, 0.06f, 0.21f), //Dark
-        Color.yellow, //Light
-        Color.cyan // Air
+        new Color(0.7861634f, 0.6659856f, 0f), //Light
+        new Color(0.1259839f, 0.6163521f, 0.6163521f) // Air
     };
     
     private Color[] typeColors =
     {
         Color.red, //Fire
-        new Color(0.0f, 0.52f, 0.24f),
+        new Color(0.4402515f, 0.2920384f, 0.0733752f), //Earth
         Color.blue, //Water
         new Color(0.899371f, 0.2008029f, 0.8248572f), //Dark
         Color.yellow, //Light
