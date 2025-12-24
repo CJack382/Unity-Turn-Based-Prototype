@@ -6,6 +6,8 @@ using System;
 
 public class HandManager : MonoBehaviour
 {
+    public DeckManager deckManager;
+    
     public GameObject cardPrefab; //Assign Card prefab in inspector
     public Transform handTransform; //Root of hand position, Also I hate public variable, but I can't go off script
     public float fanSpread = 7.5f;
@@ -16,20 +18,18 @@ public class HandManager : MonoBehaviour
 
     void Start()
     {
-        AddCardToHand();
-        AddCardToHand();
-        AddCardToHand();
-        AddCardToHand();
-        AddCardToHand();
-        AddCardToHand();
+        
     }
 
-    public void AddCardToHand()
+    public void AddCardToHand(Card cardData)
     {
         //Card Instantiation
         GameObject newCard = Instantiate(cardPrefab, handTransform.position, Quaternion.identity, handTransform); //You've seen it before, but just to really hit it home, Instantiate takes the desired gameObject, position,
                                                                                                                   //rotation (Quaternion), and transform to 'spawn' the object
         cardsInHand.Add(newCard);
+
+        //Set the CardData of the Instantiated CArd
+        newCard.GetComponent<CardDisplay>().cardData = cardData;
 
         UpdateHandVisuals();
     }
