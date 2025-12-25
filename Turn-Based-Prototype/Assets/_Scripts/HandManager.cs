@@ -14,6 +14,9 @@ public class HandManager : MonoBehaviour
 
     public float cardSpacing = -150f;
     public float verticalSpacing = 75f;
+
+    public int maxHandSize = 12;
+
     public List<GameObject> cardsInHand = new List<GameObject>(); //List of Card objects in hand
 
     void Start()
@@ -23,20 +26,22 @@ public class HandManager : MonoBehaviour
 
     public void AddCardToHand(Card cardData)
     {
-        //Card Instantiation
-        GameObject newCard = Instantiate(cardPrefab, handTransform.position, Quaternion.identity, handTransform); //You've seen it before, but just to really hit it home, Instantiate takes the desired gameObject, position,
-                                                                                                                  //rotation (Quaternion), and transform to 'spawn' the object
-        cardsInHand.Add(newCard);
+        if (cardsInHand.Count < maxHandSize) {
+            //Card Instantiation
+            GameObject newCard = Instantiate(cardPrefab, handTransform.position, Quaternion.identity, handTransform); //You've seen it before, but just to really hit it home, Instantiate takes the desired gameObject, position,
+                                                                                                                      //rotation (Quaternion), and transform to 'spawn' the object
+            cardsInHand.Add(newCard);
 
-        //Set the CardData of the Instantiated CArd
-        newCard.GetComponent<CardDisplay>().cardData = cardData;
+            //Set the CardData of the Instantiated CArd
+            newCard.GetComponent<CardDisplay>().cardData = cardData;
+        }
 
         UpdateHandVisuals();
     }
 
     private void Update()
     {
-        UpdateHandVisuals();
+        //UpdateHandVisuals();
     }
 
     private void UpdateHandVisuals()

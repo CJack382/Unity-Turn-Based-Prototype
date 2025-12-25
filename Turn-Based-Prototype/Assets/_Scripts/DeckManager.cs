@@ -18,6 +18,12 @@ public class DeckManager : MonoBehaviour
         //Add the loaded cards to the allCards list
         allCards.AddRange(cards); //AddRange simply functions as if you were just adding all elements of an Array or List to the end of an existing list .AddRange takes every element from the input list and
                                   //adds it to the end of the existing list
+
+        HandManager hand = FindAnyObjectByType<HandManager>(); //Assume only 1 will be in scene, may need to change later
+        for (int i = 0; i < 6; i++)
+        {
+            DrawCard(hand);
+        }
     }
 
     public void DrawCard(HandManager handManager)
@@ -26,12 +32,6 @@ public class DeckManager : MonoBehaviour
         {
             return;
         }
-        if (currentIndex >= 18)
-        {
-            Debug.Log("Woah there pal, slow it down");
-            return;
-        }
-        Debug.Log("Current Index: " + currentIndex);
 
         Card nextCard = allCards[currentIndex];
         handManager.AddCardToHand(nextCard);
