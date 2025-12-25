@@ -525,7 +525,7 @@ GameObject:
   - component: {fileID: 4320407941421664108}
   - component: {fileID: 4370880724004883033}
   - component: {fileID: 9136965511180581892}
-  - component: {fileID: 5355059330982720568}
+  - component: {fileID: 3026555285738830474}
   m_Layer: 0
   m_Name: CardPrefab
   m_TagString: Untagged
@@ -621,7 +621,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 2.5, y: 3.5}
   m_EdgeRadius: 0
---- !u!114 &5355059330982720568
+--- !u!114 &3026555285738830474
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -630,10 +630,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 3992275906968994646}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa0f1a98c4825984ca30472b78038429, type: 3}
+  m_Script: {fileID: 11500000, guid: 01512cbce1b42fe46afc5bfff2b8f602, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSensitivity: 1
+  selectScale: 1.1
+  cardPlay: {x: 0, y: 300}
+  playPosition: {x: -600, y: 500, z: 0}
+  glowEffect: {fileID: 4769333578319563682}
+  playArrow: {fileID: 7247713478628450339}
+  cardMovementTime: 1
 --- !u!1 &4769333578319563682
 GameObject:
   m_ObjectHideFlags: 0
@@ -968,6 +973,7 @@ RectTransform:
   - {fileID: 6429891740630776751}
   - {fileID: 3995257077747062110}
   - {fileID: 6639023581830797770}
+  - {fileID: 1586388235490090129}
   m_Father: {fileID: 4320407941421664108}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -1020,7 +1026,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 128
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &7076942592006444224
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1188,6 +1194,41 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &7247713478628450339
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1586388235490090129}
+  m_Layer: 0
+  m_Name: PlayArrow
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1586388235490090129
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7247713478628450339}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3586254368030691947}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &7666384313353902287
 GameObject:
   m_ObjectHideFlags: 0
