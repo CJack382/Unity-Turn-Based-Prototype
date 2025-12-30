@@ -1,3 +1,4 @@
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -7,8 +8,8 @@ public class CardMovement : MonoBehaviour, IDragHandler, IPointerDownHandler, IP
     private RectTransform rectTransform;
     private Canvas canvas;
 
-    private Vector2 originalLocalPointerPosition; //Mouse Pointer position
-    private Vector3 originalPanelLocalPosition; //original position of card
+    private RectTransform canvasRectTransform;
+
     private Vector3 originalScale; //original scale of card
 
     private int currentState = 0;
@@ -27,14 +28,34 @@ public class CardMovement : MonoBehaviour, IDragHandler, IPointerDownHandler, IP
 
     [SerializeField] private float lerpFactor = 0.1f;
 
+    [SerializeField] private int cardPlayDivider = 4;
+    [SerializeField] private float cardPlayMultiplier = 1f;
+
+    [SerializeField] private bool needUpdateCardPlayPosition = false;
+
+    [SerializeField] private int playPositionYDivider = 2;
+    [SerializeField] private float playPositionYMultiplier = 1f;
+    [SerializeField] private int playPositionXDivider = 4;
+    [SerializeField] private float playPositionXMultiplier = 2f;
+
+    [SerializeField] private bool needUpdatePlayPosition = false;
+
     void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
         canvas = GetComponentInParent<Canvas>();
+
+        if (canvas != null )
+        {
+            canvasRectTransform = canvas.GetComponent<RectTransform>();
+        }
+
         originalScale = rectTransform.localScale;
         originalPosition = rectTransform.localPosition;
         originalRotation = rectTransform.localRotation;
 
+        UpdateCardPlayPosition();
+        UpdatePlayPosition();
     }
 
     void Update()
@@ -89,10 +110,6 @@ public class CardMovement : MonoBehaviour, IDragHandler, IPointerDownHandler, IP
         if (currentState == 1)
         {
             currentState = 2;
-            //Finds a specific point in the rectangle (first variable), using the PointerEventData (second variable), and the camera (If Screen Space overlay, it's null, in this case the screen space scales w/screen size, so you
-            //take the camera data from PointerEventData). The final variable is the specific point you wish to find
-            RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas.GetComponent<RectTransform>(), eventData.position, eventData.pressEventCamera, out originalLocalPointerPosition);
-            originalPanelLocalPosition = rectTransform.localPosition;
         }
     }
 
@@ -100,17 +117,11 @@ public class CardMovement : MonoBehaviour, IDragHandler, IPointerDownHandler, IP
     {
         if (currentState == 2) 
         {
-            Vector2 localPointerPosition;
-            if (RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas.GetComponent<RectTransform>(), eventData.position, eventData.pressEventCamera, out localPointerPosition))
+            if(Input.mousePosition.y > cardPlay.y) //Whenever card is dragged above predetermined y position
             {
-                rectTransform.position = Vector3.Lerp(rectTransform.position, Input.mousePosition, lerpFactor);
-
-                if(Input.mousePosition.y > cardPlay.y) //Whenever card is dragged above predetermined y position
-                {
-                    currentState = 3;
-                    playArrow.SetActive(true);
-                    rectTransform.localPosition = Vector3.Lerp(rectTransform.position, playPosition, lerpFactor);
-                }
+                currentState = 3;
+                playArrow.SetActive(true);
+                rectTransform.localPosition = Vector3.Lerp(rectTransform.position, playPosition, lerpFactor);
             }
         }
     }
@@ -133,6 +144,7 @@ public class CardMovement : MonoBehaviour, IDragHandler, IPointerDownHandler, IP
     {
         //Set card rotation to 0
         rectTransform.localRotation = Quaternion.identity;
+        rectTransform.position = Vector3.Lerp(rectTransform.position, Input.mousePosition, lerpFactor);
     }
 
     private void HandlePlayState()
@@ -144,6 +156,29 @@ public class CardMovement : MonoBehaviour, IDragHandler, IPointerDownHandler, IP
         {
             currentState = 2;
             playArrow.SetActive(false);
+        }
+    }
+
+    private void UpdateCardPlayPosition()
+    {
+        if (cardPlayDivider != 0 && canvasRectTransform != null)
+        {
+            float segment = cardPlayMultiplier / cardPlayDivider;
+
+            cardPlay.y = canvasRectTransform.rect.height * segment;
+        }
+    }
+
+    private void UpdatePlayPosition()
+    {
+        if (canvasRectTransform != null && playPositionYDivider != 0 && playPositionYMultiplier != 0 && playPositionXDivider != 0 && playPositionXMultiplier != 0)
+        {
+            float segmentX = playPositionXMultiplier / playPositionXDivider;
+            float segmentY = playPositionYMultiplier / playPositionYDivider;
+
+            //Dogshit fix for some dogshit code...
+            playPosition.x = canvasRectTransform.rect.width * -segmentX * 1.4f;
+            playPosition.y = canvasRectTransform.rect.height * segmentY;
         }
     }
 }

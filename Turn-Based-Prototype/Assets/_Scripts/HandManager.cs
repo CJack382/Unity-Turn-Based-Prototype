@@ -26,7 +26,7 @@ public class HandManager : MonoBehaviour
 
     public void AddCardToHand(Card cardData)
     {
-        if (cardsInHand.Count < maxHandSize) {
+        
             //Card Instantiation
             GameObject newCard = Instantiate(cardPrefab, handTransform.position, Quaternion.identity, handTransform); //You've seen it before, but just to really hit it home, Instantiate takes the desired gameObject, position,
                                                                                                                       //rotation (Quaternion), and transform to 'spawn' the object
@@ -34,7 +34,6 @@ public class HandManager : MonoBehaviour
 
             //Set the CardData of the Instantiated CArd
             newCard.GetComponent<CardDisplay>().cardData = cardData;
-        }
 
         UpdateHandVisuals();
     }
