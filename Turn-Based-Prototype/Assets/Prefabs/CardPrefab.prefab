@@ -638,7 +638,15 @@ MonoBehaviour:
   playPosition: {x: -600, y: 500, z: 0}
   glowEffect: {fileID: 4769333578319563682}
   playArrow: {fileID: 7247713478628450339}
-  lerpFactor: 0.1
+  lerpFactor: 0.05
+  cardPlayDivider: 4
+  cardPlayMultiplier: 1
+  needUpdateCardPlayPosition: 0
+  playPositionYDivider: 2
+  playPositionYMultiplier: 1
+  playPositionXDivider: 4
+  playPositionXMultiplier: 1
+  needUpdatePlayPosition: 0
 --- !u!1 &4769333578319563682
 GameObject:
   m_ObjectHideFlags: 0

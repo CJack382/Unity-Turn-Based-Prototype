@@ -17,11 +17,21 @@ public class ArcRenderer : MonoBehaviour
     public int dotsToSkip = 1;
     private Vector3 arrowDirection;
 
+    public float baseScreenWidth = 1920f;
+    [SerializeField] private float spacingScale;
+
     void Start()
     {
         arrowInstance = Instantiate(arrowPrefab, transform);
         arrowInstance.transform.localPosition = Vector3.zero;
         InitializeDotPool(poolSize);
+
+        spacingScale = Screen.width / baseScreenWidth; //Scales Dot spacing based on screen size
+    }
+
+    private void OnEnable()
+    {
+        spacingScale = Screen.width / baseScreenWidth;
     }
 
     private void Update()
@@ -38,7 +48,7 @@ public class ArcRenderer : MonoBehaviour
     }
     void UpdateArc(Vector3 start, Vector3 mid, Vector3 end)
     {
-        int numDots = Mathf.CeilToInt(Vector3.Distance(start, end) / spacing); //Mathf.CeilToInt rounds float numbers to integers, specifically to numbers GREATER than the float inputed, as opposed to the standard smaller rounding
+        int numDots = Mathf.CeilToInt(Vector3.Distance(start, end) / (spacing * spacingScale)); //Mathf.CeilToInt rounds float numbers to integers, specifically to numbers GREATER than the float inputed, as opposed to the standard smaller rounding
 
         for (int i = 0; i < numDots && i < dotPool.Count; i++)
         {

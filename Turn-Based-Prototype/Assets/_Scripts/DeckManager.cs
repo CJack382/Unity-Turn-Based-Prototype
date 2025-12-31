@@ -9,6 +9,9 @@ public class DeckManager : MonoBehaviour
 
     private int currentIndex = 0;
 
+    public int maxHandSize;
+    public int currentHandSize;
+    private HandManager handManager;
     private void Start()
     {
         //Load All card assets from the Resources folders
@@ -19,11 +22,17 @@ public class DeckManager : MonoBehaviour
         allCards.AddRange(cards); //AddRange simply functions as if you were just adding all elements of an Array or List to the end of an existing list .AddRange takes every element from the input list and
                                   //adds it to the end of the existing list
 
-        HandManager hand = FindAnyObjectByType<HandManager>(); //Assume only 1 will be in scene, may need to change later
+        handManager = FindAnyObjectByType<HandManager>(); //Assume only 1 will be in scene, may need to change later
+        maxHandSize = handManager.maxHandSize;
         for (int i = 0; i < 6; i++)
         {
-            DrawCard(hand);
+            DrawCard(handManager);
         }
+    }
+
+    private void Update()
+    {
+        currentHandSize = handManager.cardsInHand.Count;
     }
 
     public void DrawCard(HandManager handManager)
@@ -32,9 +41,11 @@ public class DeckManager : MonoBehaviour
         {
             return;
         }
-
-        Card nextCard = allCards[currentIndex];
-        handManager.AddCardToHand(nextCard);
-        currentIndex = (currentIndex + 1) % (allCards.Count + 1); //For some reason, the math in the video had it to where the deck cannot access the last card, adding 1 to the list count fixes it, but its patchwork
+        if (currentHandSize < maxHandSize)
+        {
+            Card nextCard = allCards[currentIndex];
+            handManager.AddCardToHand(nextCard);
+            currentIndex = (currentIndex + 1) % (allCards.Count + 1); //For some reason, the math in the video had it to where the deck cannot access the last card, adding 1 to the list count fixes it, but its patchwork
+        }
     }
 }
