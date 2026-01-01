@@ -5,9 +5,7 @@ using System.Collections;
 using System;
 
 public class HandManager : MonoBehaviour
-{
-    public DeckManager deckManager;
-    
+{    
     public GameObject cardPrefab; //Assign Card prefab in inspector
     public Transform handTransform; //Root of hand position, Also I hate public variable, but I can't go off script
     public float fanSpread = 7.5f;

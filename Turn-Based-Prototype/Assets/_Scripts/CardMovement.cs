@@ -31,14 +31,14 @@ public class CardMovement : MonoBehaviour, IDragHandler, IPointerDownHandler, IP
     [SerializeField] private int cardPlayDivider = 4;
     [SerializeField] private float cardPlayMultiplier = 1f;
 
-    [SerializeField] private bool needUpdateCardPlayPosition = false;
+    //[SerializeField] private bool needUpdateCardPlayPosition = false;
 
     [SerializeField] private int playPositionYDivider = 2;
     [SerializeField] private float playPositionYMultiplier = 1f;
     [SerializeField] private int playPositionXDivider = 4;
     [SerializeField] private float playPositionXMultiplier = 2f;
 
-    [SerializeField] private bool needUpdatePlayPosition = false;
+    //[SerializeField] private bool needUpdatePlayPosition = false;
 
     void Awake()
     {

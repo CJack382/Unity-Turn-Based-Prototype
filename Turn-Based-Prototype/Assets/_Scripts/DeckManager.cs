@@ -9,6 +9,7 @@ public class DeckManager : MonoBehaviour
 
     private int currentIndex = 0;
 
+    public int startingHandSize;
     public int maxHandSize;
     public int currentHandSize;
     private HandManager handManager;
@@ -24,7 +25,7 @@ public class DeckManager : MonoBehaviour
 
         handManager = FindAnyObjectByType<HandManager>(); //Assume only 1 will be in scene, may need to change later
         maxHandSize = handManager.maxHandSize;
-        for (int i = 0; i < 6; i++)
+        for (int i = 0; i < startingHandSize; i++)
         {
             DrawCard(handManager);
         }
