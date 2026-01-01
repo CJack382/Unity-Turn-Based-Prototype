@@ -29,7 +29,35 @@ public class GridManager : MonoBehaviour
                 Vector2 spawnPosition = gridPosition - centerOffset;
 
                 GameObject gridCell = Instantiate(gridCellPrefab, spawnPosition, Quaternion.identity);
+
+                gridCell.transform.SetParent(transform); //REVISIT FOR PERSONAL TESTING
+
+                gridCell.GetComponent<GridCell>().gridIndex = gridPosition;
+
+                gridCells[x, y] = gridCell;
             }
         }
+    }
+
+    public bool AddObjectToGrid(GameObject obj, Vector2 gridPosition)
+    {
+        if (gridPosition.x >= 0 && gridPosition.x < width && gridPosition.y >= 0 && gridPosition.y < height) 
+        {
+            GridCell cell = gridCells[(int)gridPosition.x, (int)gridPosition.y].GetComponent<GridCell>();
+
+            if (cell.cellFull) return false;
+            else
+            {
+                GameObject newObj = Instantiate(obj, cell.GetComponent<Transform>().position, Quaternion.identity);
+                newObj.transform.SetParent(transform);
+                gridObjects.Add(newObj);
+
+                cell.objectInCell = newObj;
+                cell.cellFull = true;
+
+                return true;
+            }
+        }
+        else return false;
     }
 }
