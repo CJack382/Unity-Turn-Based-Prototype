@@ -2,11 +2,12 @@ using UnityEngine;
 
 public class OptionsManager : MonoBehaviour
 {
-    private bool muteAudio;
+    private AudioManager audioManager;
+    public bool muteAudio;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        AudioManager audioManager = FindAnyObjectByType<AudioManager>();
+        audioManager = GameManager.Instance.AudioManager;
     }
 
     // Update is called once per frame
