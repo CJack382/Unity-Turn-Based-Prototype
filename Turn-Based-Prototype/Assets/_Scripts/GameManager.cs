@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     public AudioManager AudioManager { get; private set; }
     public DeckManager DeckManager { get; private set; }
 
+    public bool PlayingCard = false;
+
     private void Awake()
     {
         /* A Singleton is an instance that there can only be one of within the lifespan of an application, ideal for managing game states, configs, and data, that need to be managed from different parts of the game.
