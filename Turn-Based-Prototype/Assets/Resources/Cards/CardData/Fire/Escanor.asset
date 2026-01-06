@@ -13,9 +13,13 @@ MonoBehaviour:
   m_Name: Escanor
   m_EditorClassIdentifier: 
   cardName: Escanor
+  cardType: 00000000
   health: 20
   damageMin: 10
   damageMax: 20
-  cardType: 00000000
+  cardSprite: {fileID: -8645728142802330473, guid: 363d38434bedcf446a51c141008017f5, type: 3}
   damageType: 00000000
-  cardSprite: {fileID: 0}
+  prefab: {fileID: 1026345060812982, guid: 25a7836ee8402f9409d698be9b55590b, type: 3}
+  range: 0
+  attackPattern: 0
+  priorityTarget: 0

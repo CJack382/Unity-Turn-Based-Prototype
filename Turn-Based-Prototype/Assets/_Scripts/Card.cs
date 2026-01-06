@@ -11,14 +11,21 @@ namespace SinuousProductions
     {
         public string cardName;
         
+        public List<CardType> cardType;
+
         public int health;
         public int damageMin;
         public int damageMax;
+        public Sprite cardSprite;
 
-        public List<CardType> cardType;
         public List<DamageType> damageType;
 
-        public Sprite cardSprite;
+        public GameObject prefab;
+
+        public int range;
+        public AttackPattern attackPattern;
+        public PriorityTarget priorityTarget;
+
         //Basic Placeholder typings
         public enum CardType
         {
@@ -40,5 +47,25 @@ namespace SinuousProductions
             Air
         }
 
+        public enum AttackPattern
+        {
+            Single,
+            Multitarget,
+            Cross,
+            Column,
+            Row,
+            TwoByTwo,
+            FourByFour
+        }
+
+        public enum PriorityTarget
+        {
+            Close,
+            Far,
+            LeastCurrentHealth,
+            MostCurrentHealth,
+            MostMaxHealth,
+            MostDamage
+        }
     }
 }

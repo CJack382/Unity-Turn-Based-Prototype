@@ -18,6 +18,8 @@ public class CardMovement : MonoBehaviour, IDragHandler, IPointerDownHandler, IP
 
     private Vector3 originalPosition;
 
+    private GridManager gridManager;
+
     [SerializeField] private float selectScale = 1.1f; //Slightly increases card scale when hovering
 
     [SerializeField] private Vector2 cardPlay;
@@ -56,6 +58,7 @@ public class CardMovement : MonoBehaviour, IDragHandler, IPointerDownHandler, IP
 
         UpdateCardPlayPosition();
         UpdatePlayPosition();
+        gridManager = FindAnyObjectByType<GridManager>();
     }
 
     void Update()
@@ -74,10 +77,7 @@ public class CardMovement : MonoBehaviour, IDragHandler, IPointerDownHandler, IP
                 break;
             case 3:
                 HandlePlayState();
-                if (Mouse.current.leftButton.ReadValue() == 0)
-                {
-                    TransitionToState0();
-                }
+                
                 break;
         }
     }
@@ -152,6 +152,29 @@ public class CardMovement : MonoBehaviour, IDragHandler, IPointerDownHandler, IP
         rectTransform.localPosition = playPosition;
         rectTransform.localRotation = Quaternion.identity;
         
+        if (Mouse.current.leftButton.ReadValue() == 0)
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); //Uses Raycasting by pinpointing a ray through the camera, in the specified point (In this case where the mouse/cursor is)
+            RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction); //Returns the 2D Raycast by determining the origin of the ray, and the direction the ray is pointing (In this case the origin would be the camera
+                                                                             //and the direction would be the camera -> cursor), which determines what the mouse is hitting
+
+            if (hit.collider != null && hit.collider.GetComponent<GridCell>()) //Interestingly, GetComponent<Component>() is a bool statement, neato
+            {
+                GridCell cell = hit.collider.GetComponent<GridCell>();
+                Vector2 targetPos = cell.gridIndex;
+
+                if (gridManager.AddObjectToGrid(GetComponent<CardDisplay>().cardData.prefab, targetPos))
+                {
+                    HandManager handManager = FindAnyObjectByType<HandManager>();
+                    handManager.cardsInHand.Remove(gameObject);
+                    handManager.UpdateHandVisuals();
+                    Debug.Log("Placed Character");
+                    Destroy(gameObject);
+                }
+            }
+            TransitionToState0();
+        }
+
         if (Input.mousePosition.y < cardPlay.y)
         {
             currentState = 2;

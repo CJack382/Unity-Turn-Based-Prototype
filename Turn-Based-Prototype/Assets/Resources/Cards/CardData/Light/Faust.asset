@@ -13,9 +13,13 @@ MonoBehaviour:
   m_Name: Faust
   m_EditorClassIdentifier: 
   cardName: Faust
+  cardType: 0400000005000000
   health: 7
   damageMin: 8
   damageMax: 10
-  cardType: 0400000005000000
+  cardSprite: {fileID: 4505049754476224305, guid: b1b6c0c5f5d5f4943b6d326992fae435, type: 3}
   damageType: 04000000
-  cardSprite: {fileID: 0}
+  prefab: {fileID: 1987766920739824, guid: 09a03a70edc52de409c512f47eb5c874, type: 3}
+  range: 0
+  attackPattern: 0
+  priorityTarget: 0

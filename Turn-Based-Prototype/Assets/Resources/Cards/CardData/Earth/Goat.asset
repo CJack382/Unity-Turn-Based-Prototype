@@ -13,9 +13,13 @@ MonoBehaviour:
   m_Name: Goat
   m_EditorClassIdentifier: 
   cardName: Goat
+  cardType: 01000000
   health: 15
   damageMin: 2
   damageMax: 3
-  cardType: 01000000
+  cardSprite: {fileID: 4711520723927674112, guid: 44669ea4fe23d3d419b1ab27a1cb8f21, type: 3}
   damageType: 01000000
-  cardSprite: {fileID: 0}
+  prefab: {fileID: 1475286338648080, guid: 8db8069ae0754674c8438b689402a2a9, type: 3}
+  range: 0
+  attackPattern: 0
+  priorityTarget: 0

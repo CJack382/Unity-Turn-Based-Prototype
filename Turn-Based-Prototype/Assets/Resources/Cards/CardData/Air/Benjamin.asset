@@ -13,9 +13,13 @@ MonoBehaviour:
   m_Name: Benjamin
   m_EditorClassIdentifier: 
   cardName: Benjamin
+  cardType: 0500000003000000
   health: 7
   damageMin: 6
   damageMax: 8
-  cardType: 0500000003000000
+  cardSprite: {fileID: -8645728142802330473, guid: f266a8f705cf09d46b8c239d3efcdf61, type: 3}
   damageType: 05000000
-  cardSprite: {fileID: 0}
+  prefab: {fileID: 1808018432986172, guid: 2d936ca8cfcf8d64ba06f3d8bd183c30, type: 3}
+  range: 0
+  attackPattern: 0
+  priorityTarget: 0

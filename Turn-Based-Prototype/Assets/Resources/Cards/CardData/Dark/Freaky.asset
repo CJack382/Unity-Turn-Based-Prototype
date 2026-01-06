@@ -13,9 +13,13 @@ MonoBehaviour:
   m_Name: Freaky
   m_EditorClassIdentifier: 
   cardName: Freaky
+  cardType: 0300000002000000
   health: 5
   damageMin: 9
   damageMax: 12
-  cardType: 0300000002000000
+  cardSprite: {fileID: -2629138569536655042, guid: f591c6c31fd348440ac6338ff4596558, type: 3}
   damageType: 03000000
-  cardSprite: {fileID: 0}
+  prefab: {fileID: 1577502023061052, guid: 438423df18ba0f64ab984b82da4eefee, type: 3}
+  range: 0
+  attackPattern: 0
+  priorityTarget: 0

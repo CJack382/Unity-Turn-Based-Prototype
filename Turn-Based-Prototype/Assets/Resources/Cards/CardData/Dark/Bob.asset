@@ -13,9 +13,13 @@ MonoBehaviour:
   m_Name: Bob
   m_EditorClassIdentifier: 
   cardName: Bob
+  cardType: 0300000004000000
   health: 8
   damageMin: 2
   damageMax: 7
-  cardType: 0300000004000000
+  cardSprite: {fileID: -2629138569536655042, guid: 7372f548da87d8343aa0fac181d0d3e4, type: 3}
   damageType: 03000000
-  cardSprite: {fileID: 0}
+  prefab: {fileID: 1143415924545394, guid: ab8efeab60fbd78478cfd01be14f9e55, type: 3}
+  range: 0
+  attackPattern: 0
+  priorityTarget: 0

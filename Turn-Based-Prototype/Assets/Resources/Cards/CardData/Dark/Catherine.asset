@@ -13,9 +13,13 @@ MonoBehaviour:
   m_Name: Catherine
   m_EditorClassIdentifier: 
   cardName: Catherine
+  cardType: 0300000005000000
   health: 3
   damageMin: 7
   damageMax: 15
-  cardType: 0300000005000000
+  cardSprite: {fileID: -8645728142802330473, guid: c01198b3d48ca4b45b4eb95e6144e139, type: 3}
   damageType: 03000000
-  cardSprite: {fileID: 0}
+  prefab: {fileID: 1383231185366278, guid: 21b5304b0986ae54aa725b5ca0d8a326, type: 3}
+  range: 0
+  attackPattern: 0
+  priorityTarget: 0

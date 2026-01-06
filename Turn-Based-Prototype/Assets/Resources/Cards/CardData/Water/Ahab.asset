@@ -13,9 +13,13 @@ MonoBehaviour:
   m_Name: Ahab
   m_EditorClassIdentifier: 
   cardName: Ahab
+  cardType: 0200000003000000
   health: 18
   damageMin: 3
   damageMax: 15
-  cardType: 0200000003000000
+  cardSprite: {fileID: -3354924866470422771, guid: 7b6c10ffc09f70a4ab4209ff0a22bf95, type: 3}
   damageType: 02000000
-  cardSprite: {fileID: 0}
+  prefab: {fileID: 2946989359822449562, guid: f599d76226aa16e4b87e507fa32dd4b8, type: 3}
+  range: 0
+  attackPattern: 0
+  priorityTarget: 0

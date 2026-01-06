@@ -13,9 +13,13 @@ MonoBehaviour:
   m_Name: Ishmael
   m_EditorClassIdentifier: 
   cardName: Ishmael
+  cardType: 02000000
   health: 7
   damageMin: 7
   damageMax: 7
-  cardType: 02000000
+  cardSprite: {fileID: -5927858591751588972, guid: 391f6dc68ada8d34b9f342759a22bbf6, type: 3}
   damageType: 02000000
-  cardSprite: {fileID: 0}
+  prefab: {fileID: 6285379430149504413, guid: f14233cf1d155c940aeedb92bde580a4, type: 3}
+  range: 0
+  attackPattern: 0
+  priorityTarget: 0

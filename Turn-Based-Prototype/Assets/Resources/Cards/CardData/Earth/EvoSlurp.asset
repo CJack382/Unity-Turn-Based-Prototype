@@ -13,9 +13,13 @@ MonoBehaviour:
   m_Name: EvoSlurp
   m_EditorClassIdentifier: 
   cardName: EvoSlurp
+  cardType: 0100000002000000
   health: 15
   damageMin: 15
   damageMax: 30
-  cardType: 0100000002000000
+  cardSprite: {fileID: 4122067075425446510, guid: 2d1026aff128a044fbaec0aa0c43930d, type: 3}
   damageType: 01000000
-  cardSprite: {fileID: 0}
+  prefab: {fileID: 3032672657413112226, guid: ce9de6eff68268441bd3dbe5c5b088c9, type: 3}
+  range: 0
+  attackPattern: 0
+  priorityTarget: 0

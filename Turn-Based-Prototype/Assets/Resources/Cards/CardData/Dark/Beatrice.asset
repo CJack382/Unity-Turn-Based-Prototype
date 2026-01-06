@@ -13,9 +13,13 @@ MonoBehaviour:
   m_Name: Beatrice
   m_EditorClassIdentifier: 
   cardName: Beatrice
+  cardType: 03000000
   health: 5
   damageMin: 10
   damageMax: 12
-  cardType: 03000000
+  cardSprite: {fileID: -2629138569536655042, guid: 2db90dfdfaedff1459cf8494de5647a9, type: 3}
   damageType: 03000000
-  cardSprite: {fileID: 0}
+  prefab: {fileID: 1797753984441286, guid: e0bd3015af80d894da39ba968ceb587e, type: 3}
+  range: 0
+  attackPattern: 0
+  priorityTarget: 0

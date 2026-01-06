@@ -13,9 +13,13 @@ MonoBehaviour:
   m_Name: Joe
   m_EditorClassIdentifier: 
   cardName: Joe
+  cardType: 0500000002000000
   health: 6
   damageMin: 4
   damageMax: 7
-  cardType: 0500000002000000
+  cardSprite: {fileID: -2629138569536655042, guid: 7372f548da87d8343aa0fac181d0d3e4, type: 3}
   damageType: 05000000
-  cardSprite: {fileID: 0}
+  prefab: {fileID: 1143415924545394, guid: ab8efeab60fbd78478cfd01be14f9e55, type: 3}
+  range: 0
+  attackPattern: 0
+  priorityTarget: 0

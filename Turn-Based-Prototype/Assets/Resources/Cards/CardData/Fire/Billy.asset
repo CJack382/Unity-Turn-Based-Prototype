@@ -13,9 +13,13 @@ MonoBehaviour:
   m_Name: Billy
   m_EditorClassIdentifier: 
   cardName: Billy
+  cardType: 0000000002000000
   health: 8
   damageMin: 3
   damageMax: 6
-  cardType: 0000000002000000
+  cardSprite: {fileID: -3400982213634020427, guid: 264bab3685ada5e4e815030cad7533bf, type: 3}
   damageType: 00000000
-  cardSprite: {fileID: 0}
+  prefab: {fileID: 5539103568891418368, guid: 3d305abf938dfc84d8bf1b91d8a11a3a, type: 3}
+  range: 0
+  attackPattern: 0
+  priorityTarget: 0
