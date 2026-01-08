@@ -16,8 +16,6 @@ public class DrawPileManager : MonoBehaviour
 
     private DiscardManager discardManager;
 
-    public TextMeshProUGUI drawPileCount;
-
     public TextMeshProUGUI drawPileCounter;
     private void Start()
     {
@@ -51,12 +49,15 @@ public class DrawPileManager : MonoBehaviour
         {
             RefillDeckFromDiscard();
         }
+
         if (currentHandSize < maxHandSize)
         {
             Card nextCard = drawPile[currentIndex];
             handManager.AddCardToHand(nextCard);
 
             drawPile.RemoveAt(currentIndex);
+            UpdateDrawPileCount();
+
             if (drawPile.Count > 0)
             {
                 currentIndex %= drawPile.Count;

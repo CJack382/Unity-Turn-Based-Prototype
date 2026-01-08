@@ -7,12 +7,13 @@ public class DeckManager : MonoBehaviour
 {
     public List<Card> allCards = new List<Card>();
 
-    private int currentIndex = 0;
-
     public int startingHandSize;
-    public int maxHandSize;
+    public int maxHandSize = 12;
     public int currentHandSize;
     private HandManager handManager;
+    private DrawPileManager drawPileManager;
+    private bool startBattleRun = true;
+
     private void Start()
     {
         //Load All card assets from the Resources folders
@@ -22,31 +23,33 @@ public class DeckManager : MonoBehaviour
         //Add the loaded cards to the allCards list
         allCards.AddRange(cards); //AddRange simply functions as if you were just adding all elements of an Array or List to the end of an existing list .AddRange takes every element from the input list and
                                   //adds it to the end of the existing list
+    }
 
-        handManager = FindAnyObjectByType<HandManager>(); //Assume only 1 will be in scene, may need to change later
-        maxHandSize = handManager.maxHandSize;
-        for (int i = 0; i < startingHandSize; i++)
+    private void Awake()
+    {
+        if (drawPileManager == null)
         {
-            DrawCard(handManager);
+            drawPileManager = FindAnyObjectByType<DrawPileManager>();
+        }
+        if (handManager == null)
+        {
+            handManager = FindAnyObjectByType<HandManager>();
         }
     }
 
     private void Update()
     {
-        currentHandSize = handManager.cardsInHand.Count;
+        if (startBattleRun)
+        {
+            BattleSetup();
+        }
     }
 
-    public void DrawCard(HandManager handManager)
+    public void BattleSetup()
     {
-        if(allCards.Count == 0)
-        {
-            return;
-        }
-        if (currentHandSize < maxHandSize)
-        {
-            Card nextCard = allCards[currentIndex];
-            handManager.AddCardToHand(nextCard);
-            currentIndex = (currentIndex + 1) % (allCards.Count + 1); //For some reason, the math in the video had it to where the deck cannot access the last card, adding 1 to the list count fixes it, but its patchwork
-        }
+        handManager.BattleSetup(maxHandSize);
+        drawPileManager.MakeDrawPile(allCards);
+        drawPileManager.BattleSetup(startingHandSize, maxHandSize);
+        startBattleRun = false;
     }
 }

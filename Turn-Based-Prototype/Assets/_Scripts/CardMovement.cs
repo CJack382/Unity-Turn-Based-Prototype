@@ -175,6 +175,10 @@ public class CardMovement : MonoBehaviour, IDragHandler, IPointerDownHandler, IP
                 if (cell.gridIndex.x < maxColumn && gridManager.AddObjectToGrid(GetComponent<CardDisplay>().cardData.prefab, targetPos))
                 {
                     HandManager handManager = FindAnyObjectByType<HandManager>();
+
+                    DiscardManager discardManager = FindAnyObjectByType<DiscardManager>();
+                    discardManager.AddToDiscard(GetComponent<CardDisplay>().cardData);
+
                     handManager.cardsInHand.Remove(gameObject);
                     handManager.UpdateHandVisuals();
                     Debug.Log("Placed Character");

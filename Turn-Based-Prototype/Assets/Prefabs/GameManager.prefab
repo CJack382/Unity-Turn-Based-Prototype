@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c36e02c70bff0b5439dcb05194c23fa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayingCard: 0
 --- !u!1001 &259035985646359989
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -218,6 +219,10 @@ PrefabInstance:
     - target: {fileID: 3215828143646608019, guid: 46cc25c3bc536cf49a3a3e861e62ddaf, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3219175973805223617, guid: 46cc25c3bc536cf49a3a3e861e62ddaf, type: 3}
+      propertyPath: maxHandSize
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 8428774158047435179, guid: 46cc25c3bc536cf49a3a3e861e62ddaf, type: 3}
       propertyPath: m_Name
