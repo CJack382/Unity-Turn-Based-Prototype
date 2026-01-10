@@ -1,16 +1,19 @@
 using UnityEngine;
+using TMPro;
+using NUnit.Framework;
+using System.Collections.Generic;
 
 public class OptionsManager : MonoBehaviour
 {
     private AudioManager audioManager;
     public bool muteAudio;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    public List<TMP_FontAsset> fontList;
     void Start()
     {
         audioManager = GameManager.Instance.AudioManager;
     }
 
-    // Update is called once per frame
     void Update()
     {
         
