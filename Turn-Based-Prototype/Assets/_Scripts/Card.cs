@@ -11,23 +11,14 @@ namespace SinuousProductions
     {
         public string cardName;
         
-        public List<CardType> cardType;
+        public List<ElementType> cardType;
 
-        public int health;
-        public int damageMin;
-        public int damageMax;
         public Sprite cardSprite;
 
-        public List<DamageType> damageType;
-
-        public GameObject prefab;
-
-        public int range;
-        public AttackPattern attackPattern;
-        public PriorityTarget priorityTarget;
+        public string description;
 
         //Basic Placeholder typings
-        public enum CardType
+        public enum ElementType
         {
             Fire,
             Earth,
@@ -66,6 +57,23 @@ namespace SinuousProductions
             MostCurrentHealth,
             MostMaxHealth,
             MostDamage
+        }
+
+        public enum SpellType
+        {
+            Buff,
+            Debuff
+        }
+
+        public enum AttributeTarget
+        {
+            health,
+            damage,
+            range,
+            attackPattern,
+            damageType,
+            cardType,
+            priorityTarget
         }
     }
 }
