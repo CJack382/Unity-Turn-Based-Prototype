@@ -2,8 +2,10 @@ using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using SinuousProductions;
+using UnityEditor.U2D.Animation;
 
-public class CardMovement : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler 
+public class CardMovement : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler
 {
     private RectTransform rectTransform;
     private Canvas canvas;
@@ -44,12 +46,20 @@ public class CardMovement : MonoBehaviour, IDragHandler, IPointerDownHandler, IP
 
     //[SerializeField] private bool needUpdatePlayPosition = false;
 
+    private LayerMask gridLayerMask;
+    private LayerMask characterLayerMask;
+
+    private Card cardData;
+    private CardDisplay cardDisplay;
+    HandManager handManager;
+    DiscardManager discardManager;
+
     void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
         canvas = GetComponentInParent<Canvas>();
 
-        if (canvas != null )
+        if (canvas != null)
         {
             canvasRectTransform = canvas.GetComponent<RectTransform>();
         }
@@ -61,6 +71,15 @@ public class CardMovement : MonoBehaviour, IDragHandler, IPointerDownHandler, IP
         UpdateCardPlayPosition();
         UpdatePlayPosition();
         gridManager = FindAnyObjectByType<GridManager>();
+
+        handManager = FindAnyObjectByType<HandManager>();
+        discardManager = FindAnyObjectByType<DiscardManager>();
+        cardDisplay = GetComponent<CardDisplay>();
+
+        gridLayerMask = LayerMask.GetMask("Grid");
+        characterLayerMask = LayerMask.GetMask("Charcters");
+
+        cardData = cardDisplay.cardData;
     }
 
     void Update()
@@ -79,7 +98,7 @@ public class CardMovement : MonoBehaviour, IDragHandler, IPointerDownHandler, IP
                 break;
             case 3:
                 HandlePlayState();
-                
+
                 break;
         }
     }
@@ -105,7 +124,7 @@ public class CardMovement : MonoBehaviour, IDragHandler, IPointerDownHandler, IP
             originalRotation = rectTransform.localRotation;
             originalScale = rectTransform.localScale;
 
-            currentState = 1; 
+            currentState = 1;
         }
     }
 
@@ -119,9 +138,9 @@ public class CardMovement : MonoBehaviour, IDragHandler, IPointerDownHandler, IP
 
     public void OnDrag(PointerEventData eventData)
     {
-        if (currentState == 2) 
+        if (currentState == 2)
         {
-            if(Input.mousePosition.y > cardPlay.y) //Whenever card is dragged above predetermined y position
+            if (Input.mousePosition.y > cardPlay.y) //Whenever card is dragged above predetermined y position
             {
                 currentState = 3;
                 playArrow.SetActive(true);
@@ -160,31 +179,20 @@ public class CardMovement : MonoBehaviour, IDragHandler, IPointerDownHandler, IP
 
         rectTransform.localPosition = playPosition;
         rectTransform.localRotation = Quaternion.identity;
-        
+
         if (Mouse.current.leftButton.ReadValue() == 0)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); //Uses Raycasting by pinpointing a ray through the camera, in the specified point (In this case where the mouse/cursor is)
-            RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction); //Returns the 2D Raycast by determining the origin of the ray, and the direction the ray is pointing (In this case the origin would be the camera
-                                                                             //and the direction would be the camera -> cursor), which determines what the mouse is hitting
 
-            if (hit.collider != null && hit.collider.GetComponent<GridCell>()) //Interestingly, GetComponent<Component>() is a bool statement, neato
+            if (cardData is Character characterCard)
             {
-                GridCell cell = hit.collider.GetComponent<GridCell>();
-                Vector2 targetPos = cell.gridIndex;
-
-                if (cell.gridIndex.x < maxColumn && gridManager.AddObjectToGrid(GetComponent<CardDisplay>().cardData.prefab, targetPos))
-                {
-                    HandManager handManager = FindAnyObjectByType<HandManager>();
-
-                    DiscardManager discardManager = FindAnyObjectByType<DiscardManager>();
-                    discardManager.AddToDiscard(GetComponent<CardDisplay>().cardData);
-
-                    handManager.cardsInHand.Remove(gameObject);
-                    handManager.UpdateHandVisuals();
-                    Debug.Log("Placed Character");
-                    Destroy(gameObject);
-                }
+                TryToPlayCharacterCard(ray, characterCard);
             }
+            if (cardData is Spell spellCard)
+            {
+                TryToPlaySpellCard(ray, spellCard);
+            }
+
             TransitionToState0();
         }
 
@@ -192,6 +200,42 @@ public class CardMovement : MonoBehaviour, IDragHandler, IPointerDownHandler, IP
         {
             currentState = 2;
             playArrow.SetActive(false);
+        }
+    }
+
+    private void TryToPlayCharacterCard(Ray ray, Character characterCard)
+    {
+        RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, Mathf.Infinity, gridLayerMask); //Returns the 2D Raycast by determining the origin of the ray, and the direction the ray is pointing (In this case the origin would be the camera
+                                                                         //and the direction would be the camera -> cursor), which determines what the mouse is hitting
+
+        if (hit.collider != null && hit.collider.GetComponent<GridCell>()) //Interestingly, GetComponent<Component>() is a bool statement, neato
+        {
+            GridCell cell = hit.collider.GetComponent<GridCell>();
+            Vector2 targetPos = cell.gridIndex;
+
+            if (cell.gridIndex.x < maxColumn && gridManager.AddObjectToGrid(characterCard.prefab, targetPos))
+            {
+                handManager.cardsInHand.Remove(gameObject);
+                discardManager.AddToDiscard(cardData);
+                handManager.UpdateHandVisuals();
+                Debug.Log($"Placed Character {characterCard.prefab}");
+                Destroy(gameObject);
+            }
+        }
+    }
+    
+    private void TryToPlaySpellCard(Ray ray, Spell spellCard)
+    {
+        RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, Mathf.Infinity, characterLayerMask); //Returns the 2D Raycast by determining the origin of the ray, and the direction the ray is pointing (In this case the origin would be the camera
+                                                                                                        //and the direction would be the camera -> cursor), which determines what the mouse is hitting
+
+        if (hit.collider != null) //Interestingly, GetComponent<Component>() is a bool statement, neato
+        {
+                handManager.cardsInHand.Remove(gameObject);
+                discardManager.AddToDiscard(cardData);
+                handManager.UpdateHandVisuals();
+                Debug.Log($"Played Spell {spellCard.name}");
+                Destroy(gameObject);
         }
     }
 
