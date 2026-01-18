@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aee5e8f24a745c24783d776ab7bcfc8e, type: 3}
+  m_Name: Fye
+  m_EditorClassIdentifier: 
+  cardName: Fye
+  cardType: 0500000000000000
+  cardSprite: {fileID: -2629138569536655042, guid: f591c6c31fd348440ac6338ff4596558, type: 3}
+  description: It's Fye
+  health: 4
+  damageMin: 7
+  damageMax: 9
+  damageType: 05000000
+  prefab: {fileID: 1577502023061052, guid: 438423df18ba0f64ab984b82da4eefee, type: 3}
+  range: 5
+  attackPattern: 2
+  priorityTarget: 1

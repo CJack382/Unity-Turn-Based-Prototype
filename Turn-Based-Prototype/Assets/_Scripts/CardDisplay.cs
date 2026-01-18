@@ -55,6 +55,11 @@ public class CardDisplay : MonoBehaviour
         Color.cyan // Air
     };
 
+    private void Update()
+    {
+        UpdateCardDisplay();
+    }
+
     public void UpdateCardDisplay()
     {
         //All Card Changes
@@ -118,9 +123,9 @@ public class CardDisplay : MonoBehaviour
             symbol.SetActive(false);
         }
 
-        for (int i = 0; i < spellCard.attributeTargets.Count; i++)
+        for (int i = 0; i < spellCard.attributeTarget.Count; i++)
         {
-            GameObject currentSymbol = attributeTargetSymbols[(int)spellCard.attributeTargets[i]];
+            GameObject currentSymbol = attributeTargetSymbols[(int)spellCard.attributeTarget[i]];
             currentSymbol.SetActive(true);
             float newYPosition = i * attributeSymbolSpacing;
             currentSymbol.transform.localPosition = new Vector3(0, newYPosition, 0);
